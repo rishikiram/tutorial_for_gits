@@ -39,9 +39,20 @@ All git repos will have a folder called `.git` which holds all the information a
 
 ## Recording Changes to the Repository ([2.2](https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository))
 
-Git stores snapshots of all tracked files in a repository. These snapshots are called *commits*. A commit refers to the state of every *tracked* file. Files can also be *untracked*, in which case Git basically leaves them alone.
+Git stores snapshots of all tracked files in a repository. These snapshots are called *commits*. A commit refers to a specific state of every *tracked* file. Files can also be *untracked*, in which case Git basically leaves them alone.
 
-To make a commit, you must first *add* the file to the *staging area*, and then *commit* the staged changes. By first building up a set of changes in the staging area, users have greater control over the state of a commit.
+To make a commit, you must first *add* the file to the *staging area*, and then commit the staged changes. By first building up a set of changes in the staging area, users have greater control over the state of a commit. 
+
+Files can be in one of 4 states, Untracked, Unmodified, Modified, or Staged. ![File Lifecycle](images/lifecycle.png)
+To view the state of every file, run
+```bash
+$ git status
+```
+
+Create a new file named `hello_world.py`
+
+
+
 
 
 
