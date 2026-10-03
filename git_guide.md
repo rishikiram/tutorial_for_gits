@@ -14,6 +14,10 @@ Git thinks of its data like a series of snapshots of a miniature filesystem. Wit
 
 Git is an appliation. The most classic way to run it is through its command-line-interface, or CLI. There also exist many graphical user interfaces, such as a vscode extension and the github desktop app. In this tutorial we'll learn a set of git functions in the CLI, which is how all things git work behind the scenes.
 
+## Setting a Remote, and pushing to Github
+
+git username and email
+
 ## Git Repositories ([2.1](https://git-scm.com/book/en/v2/Git-Basics-Getting-a-Git-Repository))
 
 A project that is managed by Git is called a *repository*, or a *repo*. 
