@@ -13,6 +13,7 @@ COMMITS = [
     ("b72c", "a1f3", "Add README"),
     ("c9e0", "b72c", "Start feature"),
     ("d415", "b72c", "Fix typo"),
+    # ("e829", "d415", "WRITE A SIMULATED COMMIT MSG HERE")
 ]
 
 X_STEP = 1.6

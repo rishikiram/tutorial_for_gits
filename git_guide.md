@@ -14,9 +14,30 @@ Git thinks of its data like a series of snapshots of a miniature filesystem. Wit
 
 Git is an appliation. The most classic way to run it is through its command-line-interface, or CLI. There also exist many graphical user interfaces, such as a vscode extension and the github desktop app. In this tutorial we'll learn a set of git functions in the CLI, which is how all things git work behind the scenes.
 
-## Setting a Remote, and pushing to Github
+## SSH acces to Github
+To a
 
-git username and email
+```bash
+ssh-keygen -t ed25519 -C "your_email@example.com"
+pbcopy < ~/.ssh/id_ed25519.pub
+```
+now, create a ssh key in github. Go to account->setting->ssh keys. Then paste the public key.
+Test github ssh with the following command
+```bash
+ssh -T git@github.com
+```
+Next, create a repository on github.com.
+```bash 
+# if you need to push an existing repo
+git remote add origin git@github.com:[username]/[repo_name]
+git push -u origin main
+# note, -u sets the default upstream branch
+
+# or if you are staring a repo from scratch
+git clone git@github.com:[username]/[repo_name]
+```
+
+
 
 ## Git Repositories ([2.1](https://git-scm.com/book/en/v2/Git-Basics-Getting-a-Git-Repository))
 
