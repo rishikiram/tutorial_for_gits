@@ -149,7 +149,19 @@ To understand how Git handles branching, its useful to understand how Git works 
 
 ![File Branching](images/branching.png)
 
-It is also worth mentioning what *HEAD* represents. The entire *tree* of the git record is stored in the `/.git/` folder, but at any given time, your files refect the state of a specific commit. HEAD represents where you currently are on the tree. HEAD can moved to any branch, or any commit in the tree.
+It is also worth mentioning what *HEAD* represents. The entire *tree* of the git record is stored in the `./.git/` folder, but at any given time, your files refect the state of a specific commit. HEAD represents where you currently are on the tree. HEAD can moved to any branch, or any commit in the tree.
+
+### Excercise
+Lets make a branch, and in this branch we'll add branches to out git graphing tool. Run the following:
+```bash
+$ git branch feature_draw_branches # this creates a new branch at the current commit
+$ git checkout feature_draw_branches # this move out HEAD to the new branch. Now, new commits will be on this branch
+# you can confirm what branch you are on by running. the '*' will be next to the current branch
+$ git branch
+```
+Next, edit `<your_name>_git_tree.py` by copy-and-pasting `draw_git_tree_v2.py` into it.
+
+Next, add and commit the changes, just like in the section 'Recording Changes to a Repository'.
 
 ## Pulling Remote Changes 
 We just *pushed* changes from the local git record to the remote repository. Now, lets practice *pulling* changes from the remote repo to our local repo.

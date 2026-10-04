@@ -12,7 +12,7 @@ BRANCHES = [
     ("feature", "#e07b39"),
 ]
 
-# Commits in chronological order: (id, branch, parents, message).
+# Commits in chronological order: (id, branch, parent, message).
 # A commit with two parents is a merge commit.
 COMMITS = [
     ("a1f3", 0, None, "Initial commit"),
