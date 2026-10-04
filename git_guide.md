@@ -48,28 +48,28 @@ We will start by creating and uploading an SSH key to GitHub. This must be done 
 
 ```bash
 # generate an ssh key if needed. Use the email associated with your GitHub account email
-ssh-keygen -t ed25519 -C "your_email@example.com"
+$ ssh-keygen -t ed25519 -C "your_email@example.com"
 # copy ssh public key to clipboard
-pbcopy < ~/.ssh/id_ed25519.pub
+$ pbcopy < ~/.ssh/id_ed25519.pub
 ```
 Now, add the ssh key to your github account. Go to account->setting->ssh keys. Then paste the public key.
 
 Test github ssh with the following command:
 ```bash
-ssh -T git@github.com
+$ ssh -T git@github.com
 ```
 Next, create an empty repository on github.com. You can read more detailed explination here: [Adding a local repository to GitHub using Git](https://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github#adding-a-local-repository-to-github-using-git)
 ```bash 
 # if you want to push an existing local git repo
-git remote add origin git@github.com:[username]/[repo_name]
-git push -u origin main
+$ git remote add origin git@github.com:[username]/[repo_name]
+$ git push -u origin main
 # note, -u sets the default upstream branch
 
 # or if you are staring the repo from scratch, use git clone to automatically set the upstream remote.
-git clone git@github.com:[username]/[repo_name]
+$ git clone git@github.com:[username]/[repo_name]
 
 # to check that things are set up properly, run this
-git remote show origin
+$ git remote show origin
 ```
 
 
@@ -85,8 +85,75 @@ To view the state of every file, run
 $ git status
 ```
 ### Excercise 
-Lets make a file to track with git. Create a new file named `[your name]_git_tree.py`
-Copy `draw_git_tree_v1.py`
+Lets make a file to track with git. Create a new file named `<your_name>_git_tree.py`
+and copy `draw_git_tree_v1.py` into it. 
+
+Now, run:
+
+```bash
+$ git status
+$ git add your_name_git_tree.py
+$ git commit -m "write a descriptive enough commit message'
+```
+
+To see you commit history, run
+```bash
+$ git log
+```
+
+To *push* or upload your new commit to the remote GitHub server, run:
+```bash
+$ git push
+# this is shorthand for git push origin main. Translated, this pushed the local branch 'main' to the remote repo 'origin'. But, we set this to be the default push earlier in this tutorial.
+```
+
+You can now look ar your GitHub repo and see your updated code.
+## Undoing Things ([2.4](https://git-scm.com/book/en/v2/Git-Basics-Undoing-Things))
+Anything that is committed in Git can almost always be recovered. However, anything you lose that was never committed is likely never to be seen again. It is good practice to commit often.
+
+### Execercise
+We will pactice undoing changes of a modified file to the most recent commit.
+Start by modifying `<your_name>_git_tree.py`. Then, run:
+```bash
+$ git status
+```
+You should see the following message:
+```bash
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   <your_name>_git_tree.py
+```
+At this point, you could run `git restore <file>` to revert your changes. Note, be careful because you cannot undo this operation. Since the modifications have never been commited, you will most likley loose those modifications forever. 
+
+For this excercise, run the following:
+```bash
+$ git add <your_name>_git_tree.py
+$ git status
+```
+
+You should now see:
+```bash
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   <your_name>_git_tree.py
+```
+
+Unstaging a file does not discard the modifications. This command just allows you to control what will be in the next commit.
+
+Like previously mentioned, almost anything that is committed in Git can be recovered. There are multiple ways of recovering or restoring code from previous commits, with various advantages depending on your situation. 
+
+## Branches, and Merging ([3.1](https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell))
+One of the core features of Git (and generally Version Control Systems) is *branching*, or diverging your edits from the main line of development and continuing to do work without messing with that main line. 
+To understand how Git handles branching, its useful to understand how Git works under the hood. Git saves a series of snapshots of a file system, also called commits. Each commit has a previous commit, called a *parent*. This results in a connected lineage of commits. Branches allow a commit to have multiple *children*.
+
+![File Branching](images/branching.png)
+
+It is also worth mentioning what *HEAD* represents. The entire *tree* of the git record is stored in the `/.git/` folder, but at any given time, your files refect the state of a specific commit. HEAD represents where you currently are on the tree. HEAD can moved to any branch, or any commit in the tree.
+
+## Pulling Remote Changes 
+We just *pushed* changes from the local git record to the remote repository. Now, lets practice *pulling* changes from the remote repo to our local repo.
+
 
 
 ## Forking and Pull Requests

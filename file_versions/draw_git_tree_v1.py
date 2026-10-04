@@ -8,14 +8,12 @@ from matplotlib.path import Path
 
 tree_color = "#2f6fdb"
 
-# Commits in chronological order: (id, lane, parents, message).
+# Commits in chronological order: (id, parent, message).
 # A commit with two parents is a merge commit.
 COMMITS = [
     ("a1f3",  None, "Initial commit"),
-    ("b72c", "a1f3", "Add README"),
-    ("c9e0", "b72c", "Start feature"),
-    ("d415", "b72c", "Fix typo"),
-    # ("e829", "d415", "WRITE A SIMULATED COMMIT MSG HERE")
+    ("b72c", "a1f3", "straight line function"),
+    ("d415", "b72c", "Fix typo")
 ]
 
 X_STEP = 1.6
