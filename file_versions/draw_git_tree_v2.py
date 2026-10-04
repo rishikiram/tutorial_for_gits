@@ -1,5 +1,7 @@
 """Draw a git history graph (branch, then merge) and save it as a PNG."""
 
+import os
+
 import matplotlib.pyplot as plt
 from matplotlib.patches import PathPatch
 from matplotlib.path import Path
@@ -80,6 +82,7 @@ def main():
     ax.set_aspect("equal")
     ax.axis("off")
 
+    os.makedirs(os.path.dirname(OUTPUT), exist_ok=True)
     fig.savefig(OUTPUT, dpi=200, bbox_inches="tight")
     print(f"Saved {OUTPUT}")
 

@@ -14,31 +14,6 @@ Git thinks of its data like a series of snapshots of a miniature filesystem. Wit
 
 Git is an appliation. The most classic way to run it is through its command-line-interface, or CLI. There also exist many graphical user interfaces, such as a vscode extension and the github desktop app. In this tutorial we'll learn a set of git functions in the CLI, which is how all things git work behind the scenes.
 
-## SSH acces to Github
-To a
-
-```bash
-ssh-keygen -t ed25519 -C "your_email@example.com"
-pbcopy < ~/.ssh/id_ed25519.pub
-```
-now, create a ssh key in github. Go to account->setting->ssh keys. Then paste the public key.
-Test github ssh with the following command
-```bash
-ssh -T git@github.com
-```
-Next, create a repository on github.com.
-```bash 
-# if you need to push an existing repo
-git remote add origin git@github.com:[username]/[repo_name]
-git push -u origin main
-# note, -u sets the default upstream branch
-
-# or if you are staring a repo from scratch
-git clone git@github.com:[username]/[repo_name]
-```
-
-
-
 ## Git Repositories ([2.1](https://git-scm.com/book/en/v2/Git-Basics-Getting-a-Git-Repository))
 
 A project that is managed by Git is called a *repository*, or a *repo*. 
@@ -62,7 +37,43 @@ $ git clone https://[INSERT LINK TO REPO]
 
 All git repos will have a folder called `.git` which holds all the information about past snapshots. 
 
-## Recording Changes to the Repository ([2.2](https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository))
+## Following along with this Tutorial
+To follow along with this tutorial, you should start your own blank GitHub repo. We will be copying some file from `file_versions/` folder from this repo. I recommend copy-pasting the code when neessary. To learn how to start your own GitHub repo, continure reading.
+
+## SSH access to Github
+To access GitHub there are a couple different methods. I like using SSH, which allows you to *push* and *pull* code using Git commands. For a full guide, see [GitHub's guide to Authentication](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/about-authentication-to-github#authenticating-with-the-command-line).
+
+### Excercise
+We will start by creating and uploading an SSH key to GitHub. This must be done for each computer that accesses your GitHub account.
+
+```bash
+# generate an ssh key if needed. Use the email associated with your GitHub account email
+ssh-keygen -t ed25519 -C "your_email@example.com"
+# copy ssh public key to clipboard
+pbcopy < ~/.ssh/id_ed25519.pub
+```
+Now, add the ssh key to your github account. Go to account->setting->ssh keys. Then paste the public key.
+
+Test github ssh with the following command:
+```bash
+ssh -T git@github.com
+```
+Next, create an empty repository on github.com. You can read more detailed explination here: [Adding a local repository to GitHub using Git](https://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github#adding-a-local-repository-to-github-using-git)
+```bash 
+# if you want to push an existing local git repo
+git remote add origin git@github.com:[username]/[repo_name]
+git push -u origin main
+# note, -u sets the default upstream branch
+
+# or if you are staring the repo from scratch, use git clone to automatically set the upstream remote.
+git clone git@github.com:[username]/[repo_name]
+
+# to check that things are set up properly, run this
+git remote show origin
+```
+
+
+## Recording Changes to a Repository ([2.2](https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository))
 
 Git stores snapshots of all tracked files in a repository. These snapshots are called *commits*. A commit refers to a specific state of every *tracked* file. Files can also be *untracked*, in which case Git basically leaves them alone.
 
@@ -73,10 +84,12 @@ To view the state of every file, run
 ```bash
 $ git status
 ```
+### Excercise 
+Lets make a file to track with git. Create a new file named `[your name]_git_tree.py`
+Copy `draw_git_tree_v1.py`
 
-Create a new file named `hello_world.py`
 
-
+## Forking and Pull Requests
 
 
 
