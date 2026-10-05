@@ -26,13 +26,13 @@ To turn a local directory into a Git repo you must
 - navigate to the desired folder
 - run this:
 ```bash
-$ git init
+% git init
 ```
 To clone a repo you must
 - navigate to the desired parent folder
 - run this:
 ```bash
-$ git clone https://[INSERT LINK TO REPO] 
+% git clone https://[INSERT LINK TO REPO] 
 ```
 
 All git repos will have a folder called `.git` which holds all the information about past snapshots. 
@@ -48,28 +48,28 @@ We will start by creating and uploading an SSH key to GitHub. This must be done 
 
 ```bash
 # generate an ssh key if needed. Use the email associated with your GitHub account email
-$ ssh-keygen -t ed25519 -C "your_email@example.com"
+% ssh-keygen -t ed25519 -C "your_email@example.com"
 # copy ssh public key to clipboard
-$ pbcopy < ~/.ssh/id_ed25519.pub
+% pbcopy < ~/.ssh/id_ed25519.pub
 ```
 Now, add the ssh key to your github account. Go to account->setting->ssh keys. Then paste the public key.
 
 Test github ssh with the following command:
 ```bash
-$ ssh -T git@github.com
+% ssh -T git@github.com
 ```
 Next, create an empty repository on github.com. You can read more detailed explination here: [Adding a local repository to GitHub using Git](https://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github#adding-a-local-repository-to-github-using-git)
 ```bash 
 # if you want to push an existing local git repo
-$ git remote add origin git@github.com:[username]/[repo_name]
-$ git push -u origin main
+% git remote add origin git@github.com:[username]/[repo_name]
+% git push -u origin main
 # note, -u sets the default upstream branch
 
 # or if you are staring the repo from scratch, use git clone to automatically set the upstream remote.
-$ git clone git@github.com:[username]/[repo_name]
+% git clone git@github.com:[username]/[repo_name]
 
 # to check that things are set up properly, run this
-$ git remote show origin
+% git remote show origin
 ```
 
 
@@ -82,7 +82,7 @@ To make a commit, you must first *add* the file to the *staging area*, and then 
 Files can be in one of 4 states, Untracked, Unmodified, Modified, or Staged. ![File Lifecycle](images/lifecycle.png)
 To view the state of every file, run
 ```bash
-$ git status
+% git status
 ```
 ### Excercise 
 Lets make a file to track with git. Create a new file named `<your_name>_git_tree.py`
@@ -91,23 +91,24 @@ and copy `draw_git_tree_v1.py` into it.
 Now, run:
 
 ```bash
-$ git status
-$ git add your_name_git_tree.py
-$ git commit -m "write a descriptive enough commit message'
+% git status
+% git add your_name_git_tree.py
+% git commit -m "write a descriptive enough commit message'
 ```
 
 To see you commit history, run
 ```bash
-$ git log
+% git log
 ```
 
 To *push* or upload your new commit to the remote GitHub server, run:
 ```bash
-$ git push
+% git push
 # this is shorthand for git push origin main. Translated, this pushed the local branch 'main' to the remote repo 'origin'. But, we set this to be the default push earlier in this tutorial.
 ```
 
 You can now look ar your GitHub repo and see your updated code.
+
 ## Undoing Things ([2.4](https://git-scm.com/book/en/v2/Git-Basics-Undoing-Things))
 Anything that is committed in Git can almost always be recovered. However, anything you lose that was never committed is likely never to be seen again. It is good practice to commit often.
 
@@ -115,7 +116,7 @@ Anything that is committed in Git can almost always be recovered. However, anyth
 We will pactice undoing changes of a modified file to the most recent commit.
 Start by modifying `<your_name>_git_tree.py`. Then, run:
 ```bash
-$ git status
+% git status
 ```
 You should see the following message:
 ```bash
@@ -124,12 +125,12 @@ Changes not staged for commit:
   (use "git restore <file>..." to discard changes in working directory)
         modified:   <your_name>_git_tree.py
 ```
-At this point, you could run `git restore <file>` to revert your changes. Note, be careful because you cannot undo this operation. Since the modifications have never been commited, you will most likley loose those modifications forever. 
+At this point, you could run `git restore <file>` to revert your changes. Note: Be careful because you cannot undo this operation. Since the modifications have never been commited, you will most likley loose those modifications forever. 
 
 For this excercise, run the following:
 ```bash
-$ git add <your_name>_git_tree.py
-$ git status
+% git add <your_name>_git_tree.py
+% git status
 ```
 
 You should now see:
@@ -141,30 +142,101 @@ Changes to be committed:
 
 Unstaging a file does not discard the modifications. This command just allows you to control what will be in the next commit.
 
+Go ahead and restore your file to the previous commit, or add and commit your changes.
+
+`git restore <your_name>_git_tree.py` or `git add ..., git commit ..., git push`
+
 Like previously mentioned, almost anything that is committed in Git can be recovered. There are multiple ways of recovering or restoring code from previous commits, with various advantages depending on your situation. 
 
-## Branches, and Merging ([3.1](https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell))
-One of the core features of Git (and generally Version Control Systems) is *branching*, or diverging your edits from the main line of development and continuing to do work without messing with that main line. 
-To understand how Git handles branching, its useful to understand how Git works under the hood. Git saves a series of snapshots of a file system, also called commits. Each commit has a previous commit, called a *parent*. This results in a connected lineage of commits. Branches allow a commit to have multiple *children*.
+## Branches ([3.1](https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell))
+One of the core features of Git (and Version Control Systems in general) is *branching*, or diverging your edits from the main line of development and continuing to do work without messing with that main line. 
+To understand how Git handles branching, its useful to understand how Git works under the hood. Git saves a series of snapshots of a file system, also called commits. Each commit has a previous commit, called a *parent*. This results in a connected lineage of commits. Branches allow a commit to have multiple *children*. This data structure is also called a *tree*
 
 ![File Branching](images/branching.png)
 
-It is also worth mentioning what *HEAD* represents. The entire *tree* of the git record is stored in the `./.git/` folder, but at any given time, your files refect the state of a specific commit. HEAD represents where you currently are on the tree. HEAD can moved to any branch, or any commit in the tree.
+It is also worth mentioning what *HEAD* represents. The entire git tree is stored in the `./.git/` folder, but at any given time, your files refect the state of a specific commit. HEAD represents where you currently are on the tree. HEAD can moved to any branch, or any commit in the tree. 
 
 ### Excercise
-Lets make a branch, and in this branch we'll add branches to out git graphing tool. Run the following:
+Lets make a branch, and in this branch we'll add a feature to our git graphing tool. The feature we'll add is drawing branches. Run the following:
 ```bash
-$ git branch feature_draw_branches # this creates a new branch at the current commit
-$ git checkout feature_draw_branches # this move out HEAD to the new branch. Now, new commits will be on this branch
-# you can confirm what branch you are on by running. the '*' will be next to the current branch
-$ git branch
+% git branch feature_draw_branches 
+# this creates a new branch at the current commit
+
+% git checkout feature_draw_branches 
+# this moves out HEAD to the new branch. Now, new commits will be on this branch
+
+% git branch
+# This allows you to check what branch you are on. The '*' will be next to the current branch
 ```
 Next, edit `<your_name>_git_tree.py` by copy-and-pasting `draw_git_tree_v2.py` into it.
 
 Next, add and commit the changes, just like in the section 'Recording Changes to a Repository'.
 
+## Merging ([3.2](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging))
+Merging is one of Git's most powerful features. It is also one of the most difficult tasks for a version control system to do. The Git's merging function is designed for code files, as it can automatically handle many mergeing scenarios. For instance, say you edited lines 5-10 in the file, and your friend edited lines 105-110. This usually is automatically reconciled by Git. It is good to remember that even if Git merge works automatially, it can still easily introduce bugs into a file, or codebase. 
+
+There are also times where Git cannot automatially merge two commits, and it requires manually writing a merge. Git also provides useful features for this case.
+
+## Excercise
+This excercise assumes that you have two branches (say main and alt), which branched from the commit that had the code copied from `draw_git_tree_v1.py`. Then, the alt branch has a new commit with `draw_git_tree_v2.py` code.
+
+First switch (or checkout) your main branch. Then, edit `<your_name>_git_tree.py` on line 9 to use the color code for green (`#2fdb3b`) instead of blue (`#2f6fdb`). Then, add and commit your changes to the main branch.
+
+Now lets merge the two branches. Run the following
+```bash
+% git branch 
+# confirm you are on branch 'main'
+
+% git status
+# confirm you have no uncommited changes
+
+% git merge feature_draw_branches
+# this command merges the branch `feature_draw_branches` into the current branch 'main'
+```
+
+This should result in a merge conflict. Git notates exactly which lines caused this merge conflict. Find the following lines in `<your_name>_git_tree.py`:
+
+```python
+<<<<<< HEAD
+tree_color = "#2fdb3b"
+=======
+# Each branch: (name, color). Branch index = vertical position.
+BRANCHES = [
+    ("main", "#2f6fdb"),
+    ("feature", "#e07b39"),
+]
+>>>>>>> feature_draw_branches
+```
+
+Git is showing you two versions of the files, one from HEAD (your current branch), and one from `feature_draw_branches`. To complete the merge, you must chose how to reconcile the two different versions, and write them into the file.
+
+Once you have *resolved the merge conflict*, we can now save these changes into a commit. 
+```bash
+% git add <your_name>_git_tree.py
+% git commit -m "my first merge"
+# Don't forget to `git push` if you want to push your updates to GitHub!
+```
+
+
 ## Pulling Remote Changes 
-We just *pushed* changes from the local git record to the remote repository. Now, lets practice *pulling* changes from the remote repo to our local repo.
+So far we have pushed changes from our local repo to the remote repo. You can also *pull* changes from the remote repo to update your local repo. Pulling (and pushing) are both special types of merges, where git checks and reconciles differences between the two git trees. 
+
+### Excercise
+To pull a change from the remote, we must make an edit on the remote and not in your local repo. This most commonly happens if someone else is contributing and pushes changes to GitHub. We will instead create a README file on [github.com](https://github.com). 
+
+Go to Repositories -> your repo -> Add File, then make a README file and add some text. Then run:
+```bash
+git fetch 
+# this command accesses the internet and fetches the remote repo, but does not modify anything.
+
+git merge origin main
+# this command merges the remote named 'origin' into your local branch named 'main'
+```
+The above commands are especially powerful because you can fetch changes, and decide how you want to merge them into your local repo. However, most of the time, you will just want to do a simple merge. In that case, you can  run the following command which is exactly equivalent to `git fetch && git merge origin main`:
+```bash
+% git pull
+```
+
 
 
 
