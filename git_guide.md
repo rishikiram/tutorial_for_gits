@@ -238,9 +238,33 @@ The above commands are especially powerful because you can fetch changes, and de
 ```
 
 
+## Summary and Cheat Sheet
+### Git commands
+```bash
+% git init
+% git clone https://[INSERT LINK TO REPO]
 
+% git remote add origin git@github.com:[username]/[repo_name]
+% git push -u origin main
+% git remote show origin
 
-## Forking and Pull Requests
+% git status
+% git add
+% git commit -m "<a message>"
+
+% git push
+% git fetch
+% git merge origin main
+% git pull
+
+% git branch
+% git branch <new branch name>
+% git checkout <branch name>
+
+% git merge <branch name>
+
+%
+```
 
 
 
