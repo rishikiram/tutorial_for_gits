@@ -178,7 +178,7 @@ Merging is one of Git's most powerful features. It is also one of the most diffi
 
 There are also times where Git cannot automatially merge two commits, and it requires manually writing a merge. Git also provides useful features for this case.
 
-## Excercise
+### Excercise
 This excercise assumes that you have two branches (say main and alt), which branched from the commit that had the code copied from `draw_git_tree_v1.py`. Then, the alt branch has a new commit with `draw_git_tree_v2.py` code.
 
 First switch (or checkout) your main branch. Then, edit `<your_name>_git_tree.py` on line 9 to use the color code for green (`#2fdb3b`) instead of blue (`#2f6fdb`). Then, add and commit your changes to the main branch.
@@ -218,6 +218,7 @@ Once you have *resolved the merge conflict*, we can now save these changes into 
 # Don't forget to `git push` if you want to push your updates to GitHub!
 ```
 
+Finally, feel free to update your `<your_name>_git_tree.py` file with the final version of the code from `draw_git_tree_v3.py`. This version allows you to merge two branches in the graph by giving a commit two parents.
 
 ## Pulling Remote Changes 
 So far we have pushed changes from our local repo to the remote repo. You can also *pull* changes from the remote repo to update your local repo. Pulling (and pushing) are both special types of merges, where git checks and reconciles differences between the two git trees. 
@@ -239,8 +240,8 @@ The above commands are especially powerful because you can fetch changes, and de
 ```
 
 
-## Summary and Cheat Sheet
-### Git commands
+## Git Command
+The Git docs also has a great [cheatsheet](https://git-scm.com/cheat-sheet) 
 ```bash
 % git init
 % git clone https://[INSERT LINK TO REPO]
