@@ -1,2 +1,2 @@
 # tutorial_for_gits
-A tutorial on how to use Git
+A tutorial for gits on how to use Git
