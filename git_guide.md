@@ -38,10 +38,10 @@ To clone a repo you must
 All git repos will have a folder called `.git` which holds all the information about past snapshots. 
 
 ## Following along with this Tutorial
-To follow along with this tutorial, you should start your own blank GitHub repo. We will be copying some file from `file_versions/` folder from this repo. I recommend copy-pasting the code when neessary. To learn how to start your own GitHub repo, continure reading.
+To follow along with this tutorial, you should start your own blank GitHub repo. We will be copying some file from `file_versions/` folder from this repo. I recommend copy-pasting the code when necessary.
 
 ## SSH access to Github
-To access GitHub there are a couple different methods. I like using SSH, which allows you to *push* and *pull* code using Git commands. For a full guide, see [GitHub's guide to Authentication](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/about-authentication-to-github#authenticating-with-the-command-line).
+To access GitHub there two main options, SSH and HTTPS. But GitHub only allows authentication via SSH personal access token unless you use GitHub's command line interface. For a full guide, see [GitHub's guide to Authentication](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/about-authentication-to-github#authenticating-with-the-command-line).
 
 ### Excercise
 We will start by creating and uploading an SSH key to GitHub. This must be done for each computer that accesses your GitHub account.
@@ -49,6 +49,7 @@ We will start by creating and uploading an SSH key to GitHub. This must be done 
 ```bash
 # generate an ssh key if needed. Use the email associated with your GitHub account email
 % ssh-keygen -t ed25519 -C "your_email@example.com"
+
 # copy ssh public key to clipboard
 % pbcopy < ~/.ssh/id_ed25519.pub
 ```
@@ -61,12 +62,12 @@ Test github ssh with the following command:
 Next, create an empty repository on github.com. You can read more detailed explination here: [Adding a local repository to GitHub using Git](https://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github#adding-a-local-repository-to-github-using-git)
 ```bash 
 # if you want to push an existing local git repo
-% git remote add origin git@github.com:[username]/[repo_name]
+% git remote add origin git@github.com:<username>/<repo_name>
 % git push -u origin main
 # note, -u sets the default upstream branch
 
 # or if you are staring the repo from scratch, use git clone to automatically set the upstream remote.
-% git clone git@github.com:[username]/[repo_name]
+% git clone git@github.com:<username>/<repo_name>
 
 # to check that things are set up properly, run this
 % git remote show origin
@@ -85,14 +86,14 @@ To view the state of every file, run
 % git status
 ```
 ### Excercise 
-Lets make a file to track with git. Create a new file named `<your_name>_git_tree.py`
+Lets create a file to track with git. Create a new file named `<your_name>_git_tree.py`
 and copy `draw_git_tree_v1.py` into it. 
 
 Now, run:
 
 ```bash
 % git status
-% git add your_name_git_tree.py
+% git add <your_name>_git_tree.py
 % git commit -m "write a descriptive enough commit message'
 ```
 
@@ -110,7 +111,7 @@ To *push* or upload your new commit to the remote GitHub server, run:
 You can now look ar your GitHub repo and see your updated code.
 
 ## Undoing Things ([2.4](https://git-scm.com/book/en/v2/Git-Basics-Undoing-Things))
-Anything that is committed in Git can almost always be recovered. However, anything you lose that was never committed is likely never to be seen again. It is good practice to commit often.
+Almost anything that is committed in Git can be recovered. However, anything you lose that was never committed is likely never to be seen again. It is good practice to commit often.
 
 ### Execercise
 We will pactice undoing changes of a modified file to the most recent commit.
@@ -142,7 +143,7 @@ Changes to be committed:
 
 Unstaging a file does not discard the modifications. This command just allows you to control what will be in the next commit.
 
-Go ahead and restore your file to the previous commit, or add and commit your changes.
+Go ahead and unstage and restore your file to the previous commit, or add and commit your changes.
 
 `git restore <your_name>_git_tree.py` or `git add ..., git commit ..., git push`
 
