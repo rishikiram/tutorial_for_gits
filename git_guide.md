@@ -2,7 +2,7 @@
 
 See the [git website](https://git-scm.com/) and [git book](https://git-scm.com/book/en/v2) for source material
 
-## What is Git? ([1.2](https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control)/[1.3](https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F))
+## What is Git and GitHub? ([1.2](https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control)/[1.3](https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F))
  
 Git is a *version control system*, which is 'a system that records changes to a file or set of files over time so that you can recall specific versions later.' This becomes essential when people are collaboratively developing a codebase because it allows for easily maintaining an shared version between collaborators, and provides tools for merging different versions of code. Today, git is by far the most used version control system.
 
@@ -32,7 +32,7 @@ To clone a repo you must
 - navigate to the desired parent folder
 - run this:
 ```bash
-% git clone https://[INSERT LINK TO REPO] 
+% git clone <LINK TO REPO> 
 ```
 
 All git repos will have a folder called `.git` which holds all the information about past snapshots. 
@@ -47,12 +47,20 @@ To access GitHub there two main options, SSH and HTTPS. But GitHub only allows a
 We will start by creating and uploading an SSH key to GitHub. This must be done for each computer that accesses your GitHub account.
 
 ```bash
+# Linux/Apple
 # generate an ssh key if needed. Use the email associated with your GitHub account email
 % ssh-keygen -t ed25519 -C "your_email@example.com"
 
 # copy ssh public key to clipboard
 % pbcopy < ~/.ssh/id_ed25519.pub
 ```
+
+```PowerShell
+# Windows PowerShell
+ssh-keygen -t ed25519 -C "your_email@example.com"
+Get-Content "$HOME\.ssh\id_ed25519.pub" | Set-Clipboard
+```
+
 Now, add the ssh key to your github account. Go to account->setting->ssh keys. Then paste the public key.
 
 Test github ssh with the following command:
@@ -173,7 +181,7 @@ Next, edit `<your_name>_git_tree.py` by copy-and-pasting `draw_git_tree_v2.py` i
 
 Next, add and commit the changes, just like in the section 'Recording Changes to a Repository'.
 
-## Merging ([3.2](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging))
+## Merges ([3.2](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging))
 Merging is one of Git's most powerful features. It is also one of the most difficult tasks for a version control system to do. The Git's merging function is designed for code files, as it can automatically handle many mergeing scenarios. For instance, say you edited lines 5-10 in the file, and your friend edited lines 105-110. This usually is automatically reconciled by Git. It is good to remember that even if Git merge works automatially, it can still easily introduce bugs into a file, or codebase. 
 
 There are also times where Git cannot automatially merge two commits, and it requires manually writing a merge. Git also provides useful features for this case.
@@ -231,8 +239,8 @@ Go to Repositories -> your repo -> Add File, then make a README file and add som
 git fetch 
 # this command accesses the internet and fetches the remote repo, but does not modify anything.
 
-git merge origin main
-# this command merges the remote named 'origin' into your local branch named 'main'
+git merge origin/main
+# this command merges the remote branch named 'origin/main' into your current branch
 ```
 The above commands are especially powerful because you can fetch changes, and decide how you want to merge them into your local repo. However, most of the time, you will just want to do a simple merge. In that case, you can  run the following command which is exactly equivalent to `git fetch && git merge origin main`:
 ```bash
@@ -240,7 +248,7 @@ The above commands are especially powerful because you can fetch changes, and de
 ```
 
 
-## Git Command
+## Git Commands
 The Git docs also has a great [cheatsheet](https://git-scm.com/cheat-sheet) 
 ```bash
 % git init
@@ -264,12 +272,4 @@ The Git docs also has a great [cheatsheet](https://git-scm.com/cheat-sheet)
 % git checkout <branch name>
 
 % git merge <branch name>
-
-%
 ```
-
-
-
-
-
-
